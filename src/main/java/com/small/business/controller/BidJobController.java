@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.small.business.annotations.Monitor;
 import com.small.business.model.bidjob.BidJob;
 import com.small.business.model.people.People;
 import com.small.business.service.bidjob.BidJobService;
