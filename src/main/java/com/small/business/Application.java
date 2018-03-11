@@ -11,6 +11,10 @@ import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
 import liquibase.integration.spring.SpringLiquibase;
 
 /*
@@ -42,7 +46,16 @@ public class Application extends SpringBootServletInitializer {
         liquibase.setChangeLog("classpath:dbchange/master.xml");
         return liquibase;
     }
-
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+    	return new WebMvcConfigurerAdapter() {
+    		@Override
+    		public void addCorsMappings(CorsRegistry registry) {
+    			registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "DELETE").allowedOrigins("*")
+    				.allowedHeaders("*");
+    		}
+    	};
+    }
     @Bean
     public MultipartConfigElement multipartConfigElement() {
         MultipartConfigFactory factory = new MultipartConfigFactory();
